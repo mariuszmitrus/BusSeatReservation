@@ -1,10 +1,11 @@
 package com.company;
 
+import java.awt.*;
+import java.util.List;
 import java.util.Scanner;
 
 public class Bus extends Vehicle implements Reservation{
     private Integer Seats[][];
-    private String NoSeatsArray[];
     protected Bus (Integer ArrayOfSeats [][]){
         this.Seats=ArrayOfSeats;
     };
@@ -50,19 +51,19 @@ public class Bus extends Vehicle implements Reservation{
     }
 
     @Override
-    public Integer[][] mapBusSeats() {
+    public void mapBusSeats(List<String> PositionsWithOutSeats) {
         Integer SeatsWithNumbers [][]= this.Seats;
         int j=0,k=1;
         for(int i=0;i<SeatsWithNumbers.length;i++) {
             for (j = 0; j < SeatsWithNumbers[0].length; j++) {
-                if(j==2 || (j<=4 && j>=3 && i==3) || (i<=9 && i>=8 && j==3) || (i==11 && j>=3))SeatsWithNumbers[i][j] = -1;
+                if(PositionsWithOutSeats.contains("["+i+"]["+j+"]"))SeatsWithNumbers[i][j] = -1;
                 else {
                     SeatsWithNumbers[i][j] = k;
                     k++;
                 }
             }
         }
-        return this.Seats=SeatsWithNumbers;
+        this.Seats=SeatsWithNumbers;
     }
 
     @Override
@@ -73,12 +74,12 @@ public class Bus extends Vehicle implements Reservation{
             int ans = Integer.parseInt(scanner.nextLine());
             int k = 1;
             int i;
-            for(i=0; i<5; i++) {
+            for(i=0; i<this.Seats.length; i++) {
                 int j;
-                for(j=0; j<7; j++) {
+                for(j=0; j<this.Seats[0].length; j++) {
                     if (k == ans) {
                         if (this.Seats[i][j]== -1) {
-                            System.out.println("That seat has already been reserved");
+                            System.out.println("That seat has already been removed");
                         }
                         else {
                             this.Seats[i][j]= -1;

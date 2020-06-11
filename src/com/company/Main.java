@@ -5,12 +5,13 @@ import java.util.Scanner;
 public class Main {
 
     public static void main(String[] args) {
-        /*JelczL11 test = new JelczL11();
-        test.mapBusSeats();
-        test.printSeats2();*/
+        JelczL11 test = new JelczL11(new Integer [12][5]);
+        test.printSeats();
+        test.reserveSeats();
         System.out.print("BUS\n");
         Bus jelczl11 = new JelczL11(new Integer [12][5]);
-        jelczl11.mapBusSeats();
+        jelczl11.printSeats();
+        jelczl11.removeSeats();
         jelczl11.printSeats();
  /*
         Scanner scanner = new Scanner(System.in);
